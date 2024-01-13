@@ -18,4 +18,6 @@ async function main() {
   await fetchWiki(query);
 }
 
-main();
+if (require.main === module) {
+  main();
+}

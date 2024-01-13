@@ -16,7 +16,7 @@ async function generateImagePrompt(query: string, research: string[] = []) {
       messages: [
         {
           role: 'user',
-          content: `Based on the following research, describe the biological specimen "${query}" as vividly and accurately as possible:\n\n${research}`,
+          content: `Based on the following research, describe the biological specimen "${query}" to an artist. Include details such as shape, size, bodily features, color, and habitat:\n\n${research}`,
         },
       ],
       model: 'gpt-4-1106-preview',
@@ -39,8 +39,7 @@ async function generateImage(prompt: string, rewritePrompt = false) {
     n: 1,
     size: '1024x1024',
   });
-  const url = response.data[0].url;
-  console.log('Generated image:', url);
+  return response.data[0].url;
 }
 
 async function main() {
@@ -67,10 +66,13 @@ async function main() {
     const wikiResearch = await fetchWiki(query);
     console.log('Constructing prompt...');
     const prompt = await generateImagePrompt(query, [wikiResearch]);
+    console.log('Prompt:', prompt);
     console.log('Generating image...');
     const imageUrl = await generateImage(prompt);
     console.log('Generated:', imageUrl)
   }
 }
 
-main();
+if (require.main === module) {
+  main();
+}
