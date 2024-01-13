@@ -1,13 +1,11 @@
+import readline from 'readline';
+
 import 'dotenv/config'
 import OpenAI from 'openai';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-
-async function fetchContext(query: string) {
-  // ...
-}
 
 async function generateImagePrompt(query: string) {
   // ...
@@ -22,7 +20,27 @@ async function generateImage(prompt: string) {
 }
 
 async function main() {
-  console.log('hello world');
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  const askQuestion = () => {
+    return new Promise<string>(resolve => {
+      rl.question('What do you want to visualize? ', (answer) => {
+        resolve(answer);
+      });
+    });
+  };
+
+  while (true) {
+    const query = await askQuestion();
+    if (query.toLowerCase() === 'exit') {
+      rl.close();
+      break;
+    }
+    await generateImagePrompt(query);
+  }
 }
 
 main();

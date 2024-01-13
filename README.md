@@ -17,5 +17,6 @@ Then add API key in .env
 # Run
 
 ```
+npm run query 'Purple frog'
 npm run generate
 ```

@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "query": "ts-node ./src/query.ts",
     "generate": "ts-node ./src/generate.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "dotenv": "^16.3.1",
-    "openai": "^4.24.7"
+    "openai": "^4.24.7",
+    "wikipedia": "^2.1.2"
   }
 }
