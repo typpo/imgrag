@@ -1,6 +1,6 @@
 import wiki from 'wikipedia';
 
-async function fetchWiki(query: string): Promise<string> {
+export async function fetchWiki(query: string) {
   console.log('Searching for', query);
   const searchResults = await wiki.search(query);
   for (const result of searchResults.results) {
