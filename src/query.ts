@@ -1,13 +1,15 @@
 import wiki from 'wikipedia';
 
+import { log } from './log';
+
 export async function fetchWiki(query: string) {
-  console.log('Searching for', query);
+  log('Searching for', query);
   const searchResults = await wiki.search(query);
   for (const result of searchResults.results) {
-    console.log(result);
+    log(result);
     const page = await wiki.page(result.title);
     const summary = await page.summary();
-    console.log(summary.extract);
+    log(summary.extract);
     return summary.extract;
   }
   return '';
