@@ -1,0 +1,19 @@
+{
+  "name": "imgrag",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "generate": "ts-node ./src/generate.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Ian Webster",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-node": "^10.9.2"
+  },
+  "dependencies": {
+    "dotenv": "^16.3.1",
+    "openai": "^4.24.7"
+  }
+}
