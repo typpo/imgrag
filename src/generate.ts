@@ -4,6 +4,7 @@ import 'dotenv/config';
 import OpenAI from 'openai';
 
 import { fetchWiki } from './query';
+import { log } from './log';
 
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
@@ -43,34 +44,15 @@ async function generateImage(prompt: string, rewritePrompt = false) {
 }
 
 async function main() {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-  });
-
-  const askQuestion = () => {
-    return new Promise<string>((resolve) => {
-      rl.question('What do you want to visualize? ', (answer) => {
-        resolve(answer);
-      });
-    });
-  };
-
-  while (true) {
-    const query = await askQuestion();
-    if (query.toLowerCase() === 'exit') {
-      rl.close();
-      break;
-    }
-    console.log('Researching...');
-    const wikiResearch = await fetchWiki(query);
-    console.log('Constructing prompt...');
-    const prompt = await generateImagePrompt(query, [wikiResearch]);
-    console.log('Prompt:', prompt);
-    console.log('Generating image...');
-    const imageUrl = await generateImage(prompt);
-    console.log('Generated:', imageUrl)
-  }
+  const query = process.argv[2];
+  log('Researching...');
+  const wikiResearch = await fetchWiki(query);
+  log('Constructing prompt...');
+  const prompt = await generateImagePrompt(query, [wikiResearch]);
+  log('Prompt:', prompt);
+  log('Generating image...');
+  const imageUrl = await generateImage(prompt);
+  console.log('[IMAGE]', imageUrl);
 }
 
 if (require.main === module) {
