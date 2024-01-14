@@ -1,0 +1,85 @@
+prompts:
+  - "{{query}}"
+
+providers:
+  - openai:image:dall-e-3
+  - 'exec: ts-node /Users/ian/code/imgrag/src/generate.ts'
+
+tests:
+  - vars:
+      query: purple frog
+  - vars:
+      query: Tupandactylus
+  - vars:
+      query: 木耳
+  - vars:
+      query: Glass Frog
+  - vars:
+      query: Cookiecutter Shark
+  - vars:
+      query: Electric Eel
+#  - vars:
+#      query: Panther Cap
+#  - vars:
+#      query: Vampire Bat
+#  - vars:
+#      query: Starfruit
+#  - vars:
+#      query: Goliath Beetle
+#  - vars:
+#      query: Moonflower
+#  - vars:
+#      query: Snapdragon
+  - vars:
+      query: Zebra Mussel
+  - vars:
+      query: Dinosaur Plant
+#  - vars:
+#      query: Fire Ant
+  - vars:
+      query: Peacock Spider
+#  - vars:
+#      query: Ice Plant
+#  - vars:
+#      query: Blue Footed Booby
+#  - vars:
+#      query: Jackfruit
+#  - vars:
+#      query: Sun Bear
+#  - vars:
+#      query: Dancing Lady Orchid
+#  - vars:
+#      query: Sea Pig
+#  - vars:
+#      query: Chocolate Vine
+#
+  - vars:
+      query: Rafflesia arnoldii
+#  - vars:
+#      query: Welwitschia mirabilis
+  - vars:
+      query: Nepenthes rajah
+  - vars:
+      query: Amorphophallus titanum
+  - vars:
+      query: Wollemi Pine
+  - vars:
+      query: Phaedrolosaurus # small predator
+  - vars:
+      query: Talos sampsoni  # lil furry thing
+  - vars:
+      query: Aeolosaurus   # brachiosaur
+  - vars:
+      query: Wuerhosaurus  # stegosaur
+  - vars:
+      query: Europelta # ankylosaur
+  - vars:
+      query: desert rain frog  # chubby with white belly and brown top
+  - vars:
+      query: brazilian horned frog  # yellow with brown stripes
+  - vars:
+      query: wallace's flying frog  # big hands
+  - vars:
+      query: venezuela pebble toad  # black yucky
+#  - vars:
+#      query: surnam toad  # leaflike
