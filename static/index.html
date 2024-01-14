@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Generator</title>
+    <style>
+        body {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+        #image-result img {
+            max-width: 512px;
+            max-height: 512px;
+        }
+        #query, #generate-btn {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="query" placeholder="Enter prompt">
+    <button id="generate-btn">Generate Image</button>
+    <div id="image-result"></div>
+
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const button = document.getElementById('generate-btn');
+            const query = document.getElementById('query').value;
+            const imageResult = document.getElementById('image-result');
+            button.disabled = true;
+            imageResult.innerHTML = '<div>Generating...</div>';
+
+            fetch('/generate-image', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query: query })
+            })
+            .then(response => response.json())
+            .then(data => {
+                button.disabled = false; // Re-enable the button
+                imageResult.innerHTML = ''; // Remove loader
+                if(data.imageUrl) {
+                    imageResult.innerHTML = `<img src="${data.imageUrl}" alt="Generated Image">`;
+                } else {
+                    imageResult.textContent = 'Error: ' + data.error;
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                button.disabled = false; // Re-enable the button
+                imageResult.innerHTML = ''; // Remove loader
+                imageResult.textContent = 'Error: ' + error;
+            });
+        });
+    </script>
+</body>
+</html>

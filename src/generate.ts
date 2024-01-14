@@ -45,6 +45,17 @@ async function generateImage(prompt: string, rewritePrompt = false) {
   return response.data[0].url;
 }
 
+export async function generate(query: string) {
+  log('Researching...');
+  const wikiResearch = await fetchWiki(query);
+  log('Constructing prompt...');
+  const prompt = await generateImagePrompt(query, [wikiResearch]);
+  log('Prompt:', prompt);
+  log('Generating image...');
+  const imageUrl = await generateImage(prompt);
+  return imageUrl;
+}
+
 async function main() {
   const query = process.argv[2];
   log('Researching...');
