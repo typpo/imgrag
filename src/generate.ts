@@ -14,10 +14,12 @@ async function generateImagePrompt(query: string, research: string[] = []) {
   const descriptions: string[] = [];
   for (const result of research) {
     const chatCompletion = await openai.chat.completions.create({
+      seed: 0,
+      temperature: 0,
       messages: [
         {
           role: 'user',
-          content: `Based on the following research, describe the biological specimen "${query}" to an artist. Include details such as shape, size, bodily features, color, and habitat:\n\n${research}`,
+          content: `Summarize the following research as a photorealistic image caption. Include visual details such as shape, size, bodily features, color, and habitat. \n\n${research}`,
         },
       ],
       model: 'gpt-4-1106-preview',
