@@ -1,3 +1,10 @@
+# naturalist dall-e
+
+Generate biologically and anatomically correct images of plants and animals :)
+
+<img width="1283" alt="image" src="https://github.com/typpo/imgrag/assets/310310/00a12242-df11-439e-984f-fa5e94d09737">
+
+
 # Setup
 
 1. Install dependencies
